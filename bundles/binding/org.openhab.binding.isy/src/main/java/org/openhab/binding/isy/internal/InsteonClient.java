@@ -16,6 +16,7 @@ import com.nanoxml.XMLElement;
 import com.udi.isy.jsdk.insteon.ISYInsteonClient;
 import com.universaldevices.client.NoDeviceException;
 import com.universaldevices.common.properties.UDProperty;
+import com.universaldevices.device.model.UDAction;
 import com.universaldevices.device.model.UDControl;
 import com.universaldevices.device.model.UDFolder;
 import com.universaldevices.device.model.UDGroup;
@@ -162,7 +163,22 @@ class InsteonClient extends ISYInsteonClient {
 			this.logger.debug("Supported controls:");
 			try {
 				for (UDControl control : getControls().values()) {
-					this.logger.debug(" {}, {}", control.name, control.desc);
+					this.logger
+							.debug(String
+									.format(" %s, %s %s",
+											control.name,
+											control.desc,
+											control.isNumeric
+													&& control.numericUnit != null ? control.numericUnit
+													: ""));
+
+					if (control.actions != null && !control.actions.isEmpty()) {
+						for (UDAction action : control.actions.values()) {
+							this.logger.debug(String.format("    %s %s %s",
+									action.name, action.label,
+									action.desc != null ? action.desc : ""));
+						}
+					}
 				}
 			} catch (NoDeviceException e) {
 				this.logger.warn("Failed to get device", e);
