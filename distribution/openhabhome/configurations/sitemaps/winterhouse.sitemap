@@ -1,0 +1,47 @@
+sitemap demo label="Winterhouse"
+{
+	Frame {
+		Group item=GroundFloor label="Downstairs" icon="groundfloor"
+		Group item=SecondFloor label="Upstairs" icon="firstfloor"
+	}
+	
+	Frame label="Sensors" {
+		Group item=Sensors icon="contact"
+	}
+	
+	Frame label="Garage" {
+		Switch item=Garage mappings=[ON="Go!"]
+		Text item=Garage_Door
+	}
+	
+	Frame label="Temperature" {
+		Text item=Temperature_Outdoor
+		Text item=Temperature_Indoor
+        Setpoint item=Temperature_Setpoint minValue=50 maxValue=100 step=1.0
+		Switch item=Heater mappings=[0=Off, 1=Heat, 3=Auto, 4=Fan]
+		Text item=Humidity_Indoor
+    }
+	
+	Frame label="Date" {
+		Text item=Date
+	    Text item=Motion_Sensor_Nighttime
+	}
+	
+	Frame {
+		Text item=Motion_Sensor_Battery visibility=[Motion_Sensor_Battery==OPEN] labelcolor=[Motion_Sensor_Battery="RED"]
+	}
+	
+	Frame label="Cameras" {
+	    Text label="Front Door" icon="video" {
+	        Frame label="Front" {
+	            Image url="http://192.168.11.22:8080/snapshot.cgi?user=timd&pwd=In10klfX." label="Front" refresh=60000
+	        }
+	    }
+	    
+	    Text label="Garage" icon="video" {
+	        Frame label="Garage" {
+	            Image url="http://192.168.11.21:8080/snapshot.cgi?user=timd&pwd=In0klfX." label="Garage" refresh=60000
+	        }
+	    }
+    }
+}
