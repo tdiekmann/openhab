@@ -3,9 +3,6 @@
 	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry exported="true" kind="lib" path="lib/isy_inst.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/org.openhab.binding.isy/ISY-WSDK-4.2.22.zip!/ISY-JSDK-4.2.22/docs"/>
-		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
