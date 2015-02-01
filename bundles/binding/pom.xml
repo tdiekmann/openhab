@@ -138,6 +138,7 @@
     <module>org.openhab.binding.zibase</module>
     <module>org.openhab.binding.wago</module>
     <module>org.openhab.binding.isy</module>
+    <module>org.openhab.binding.networkupstools</module>
   </modules>
 
 </project>
