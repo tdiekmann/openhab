@@ -400,6 +400,11 @@ public class ISYBinding extends AbstractActiveBinding<ISYBindingProvider>
 					state = new DecimalType(
 							new DecimalType((String) action).doubleValue() * 0.5);
 					break;
+				case NUMBER:
+					state = new DecimalType((String) action);
+					break;
+				default:
+					break;
 				}
 
 				if (state != null) {
@@ -410,6 +415,7 @@ public class ISYBinding extends AbstractActiveBinding<ISYBindingProvider>
 			break;
 
 		case DON:
+		case DFON:
 			for (ISYBindingConfig config : getBindingConfigFromAddress(
 					node.address, control.name)) {
 
@@ -418,6 +424,14 @@ public class ISYBinding extends AbstractActiveBinding<ISYBindingProvider>
 					if ("1".equals(action)) {
 						state = OpenClosedType.OPEN;
 					}
+				} else if (config.item.getAcceptedDataTypes().contains(
+						OnOffType.class)) {
+					if (!"0".equals(action)) {
+						state = OnOffType.ON;
+					}
+				} else if (config.item.getAcceptedDataTypes().contains(
+						DecimalType.class)) {
+					state = new DecimalType((String) action);
 				}
 
 				if (state != null) {
@@ -428,6 +442,7 @@ public class ISYBinding extends AbstractActiveBinding<ISYBindingProvider>
 			break;
 
 		case DOF:
+		case DFOF:
 			for (ISYBindingConfig config : getBindingConfigFromAddress(
 					node.address, control.name)) {
 
@@ -436,6 +451,14 @@ public class ISYBinding extends AbstractActiveBinding<ISYBindingProvider>
 					if ("1".equals(action)) {
 						state = OpenClosedType.CLOSED;
 					}
+				} else if (config.item.getAcceptedDataTypes().contains(
+						OnOffType.class)) {
+					if ("1".equals(action)) {
+						state = OnOffType.OFF;
+					}
+				} else if (config.item.getAcceptedDataTypes().contains(
+						DecimalType.class)) {
+					state = new DecimalType((String) action);
 				}
 
 				if (state != null) {
