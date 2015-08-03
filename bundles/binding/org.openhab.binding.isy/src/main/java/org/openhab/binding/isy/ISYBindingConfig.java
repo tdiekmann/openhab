@@ -20,7 +20,7 @@ public class ISYBindingConfig implements BindingConfig {
 	 * Type of ISY node
 	 */
 	public enum Type {
-		SWITCH, GROUP, CONTACT, THERMOSTAT, NUMBER
+		SWITCH, GROUP, CONTACT, THERMOSTAT, NUMBER, LOCK, HEARTBEAT
 	}
 
 	public Item item;
