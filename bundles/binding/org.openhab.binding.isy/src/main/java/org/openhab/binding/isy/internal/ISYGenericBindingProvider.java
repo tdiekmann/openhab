@@ -21,6 +21,7 @@ import org.openhab.core.items.Item;
 import org.openhab.core.library.items.ContactItem;
 import org.openhab.core.library.items.NumberItem;
 import org.openhab.core.library.items.SwitchItem;
+import org.openhab.core.library.items.DateTimeItem;
 import org.openhab.model.item.binding.AbstractGenericBindingProvider;
 import org.openhab.model.item.binding.BindingConfigParseException;
 import org.slf4j.Logger;
@@ -50,7 +51,8 @@ public class ISYGenericBindingProvider extends AbstractGenericBindingProvider
 	@Override
 	public void validateItemType(final Item item, final String bindingConfig)
 			throws BindingConfigParseException {
-		if (!(item instanceof ContactItem || item instanceof SwitchItem || item instanceof NumberItem)) {
+		if (!(item instanceof ContactItem || item instanceof SwitchItem 
+				|| item instanceof NumberItem || item instanceof DateTimeItem)) {
 			throw new BindingConfigParseException(
 					"item '"
 							+ item.getName()
@@ -127,6 +129,8 @@ public class ISYGenericBindingProvider extends AbstractGenericBindingProvider
 			config.type = Type.CONTACT;
 		} else if (item instanceof NumberItem) {
 			config.type = Type.NUMBER;
+		} else if (item instanceof DateTimeItem) {
+			config.type = Type.HEARTBEAT;
 		} else {
 			config.type = Type.SWITCH;
 		}
@@ -147,6 +151,12 @@ public class ISYGenericBindingProvider extends AbstractGenericBindingProvider
 			case "type":
 				if ("thermostat".equalsIgnoreCase(value)) {
 					config.type = Type.THERMOSTAT;
+				}
+				if ("lock".equalsIgnoreCase(value)) {
+					config.type = Type.LOCK;
+				}
+				if ("heartbeat".equalsIgnoreCase(value)) {
+					config.type = Type.HEARTBEAT;
 				}
 				break;
 			case "cmd":
